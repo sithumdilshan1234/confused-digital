@@ -2,348 +2,464 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>CONFUSED DIGITEL – Neon Particles</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONFUSED DIGITEL - Digital Marketing & Web Development</title>
-    <meta name="description" content="We build brands that stand out online. Digital marketing, web development, and creative branding solutions for startups and businesses.">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <style>
+        /* ---------- root variables ---------- */
+        :root {
+            --dark: #0a0a0a;
+            --neon1: #00d4ff;
+            --neon2: #8b5cf6;
+            --grad: linear-gradient(135deg, var(--neon1), var(--neon2));
+        }
+
+        /* ---------- reset ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, sans-serif;
+            background: var(--dark);
+            color: #fff;
+            overflow-x: hidden;
+        }
+        a {
+            text-decoration: none;
+            color: var(--neon1);
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ---------- particles hero ---------- */
+        #tsparticles {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 1rem;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 900;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--grad);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--neon1);
+            border: 2px solid var(--neon1);
+            margin-left: 0.5rem;
+        }
+        .btn-secondary:hover {
+            background: var(--neon1);
+            color: #000;
+        }
+
+        /* ---------- scroll-down ---------- */
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: var(--neon1);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        /* ---------- sections ---------- */
+        section {
+            padding: 5rem 1rem;
+            max-width: 1100px;
+            margin: auto;
+        }
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon1);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.15);
+        }
+        .icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1rem;
+            background: var(--grad);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        /* ---------- portfolio ---------- */
+        .portfolio-item {
+            height: 250px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #111, #222);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            padding: 1rem;
+            text-align: center;
+        }
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        /* ---------- contact ---------- */
+        .contact-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            border-radius: 8px;
+            font: inherit;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--neon1);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+        .contact-info > div {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .contact-info i {
+            width: 45px;
+            height: 45px;
+            background: var(--grad);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* ---------- footer ---------- */
+        footer {
+            text-align: center;
+            padding: 3rem 1rem 2rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        .socials {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .socials a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s ease;
+        }
+        .socials a:hover {
+            background: var(--neon1);
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        /* ---------- responsive ---------- */
+        @media (max-width: 900px) {
+            .contact-box {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 600px) {
+            .btn-secondary {
+                margin: 0.5rem 0 0 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Loading Animation -->
-    <div class="loader">
-        <div class="loader-content">
-            <div class="loader-text">CONFUSED DIGITEL</div>
-            <div class="loader-bar"></div>
-        </div>
-    </div>
-
-    <!-- Dark/Light Toggle -->
-    <div class="theme-toggle">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h2>CONFUSED <span>DIGITEL</span></h2>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-background">
-            <div class="particles"></div>
-        </div>
+    <!-- HERO with live particles -->
+    <section class="hero">
+        <div id="tsparticles"></div>
         <div class="hero-content">
-            <h1 class="hero-title">
-                <span class="typing-text">We Build Brands That Stand Out Online.</span>
-            </h1>
-            <p class="hero-description">Transform your digital presence with cutting-edge marketing strategies and stunning web development solutions.</p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">Get Started</a>
-                <a href="#contact" class="btn btn-secondary">Contact Us</a>
+            <h1>CONFUSED DIGITEL – We Build Brands That Dominate Online</h1>
+            <p>Digital Marketing | Web Development | Branding Solutions</p>
+            <div>
+                <button class="btn btn-primary" onclick="scrollToSection('contact')">Get Started</button>
+                <button class="btn btn-secondary" onclick="scrollToSection('contact')">Contact Us</button>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
+        <div class="scroll-down"><i class="fas fa-chevron-down"></i></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <h2 class="section-title">About Us</h2>
+        <p style="max-width: 800px; margin: auto; text-align: center; color: #ccc; line-height: 1.7;">
+            CONFUSED DIGITEL is a next-generation digital agency delivering powerful marketing strategies and high-performance websites for modern businesses.
+        </p>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <h3>Digital Marketing</h3>
+                <p>Strategic campaigns that drive results and maximize ROI.</p>
+            </div>
+            <div class="card">
+                <div class="icon"><i class="fas fa-code"></i></div>
+                <h3>Web Design & Development</h3>
+                <p>Custom websites that convert visitors into customers.</p>
+            </div>
+            <div class="card">
+                <div class="icon"><i class="fas fa-palette"></i></div>
+                <h3>Branding & Logo Design</h3>
+                <p>Unique brand identities that make you stand out.</p>
+            </div>
+            <div class="card">
+                <div class="icon"><i class="fas fa-search"></i></div>
+                <h3>SEO Optimization</h3>
+                <p>Improve your search rankings and drive organic traffic.</p>
+            </div>
+            <div class="card">
+                <div class="icon"><i class="fas fa-share-alt"></i></div>
+                <h3>Social Media Management</h3>
+                <p>Engaging strategies to build your brand community.</p>
+            </div>
+            <div class="card">
+                <div class="icon"><i class="fas fa-bullseye"></i></div>
+                <h3>Paid Advertising</h3>
+                <p>Meta & Google Ads campaigns that deliver measurable results.</p>
+            </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number" data-target="150">0</div>
-                    <div class="stat-label">Happy Clients</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="300">0</div>
-                    <div class="stat-label">Projects Completed</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="5">0</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="95">0</div>
-                    <div class="stat-label">% Satisfaction</div>
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+        <h2 class="section-title">Our Portfolio</h2>
+        <div class="grid">
+            <div class="portfolio-item">
+                <div class="portfolio-overlay">
+                    <h3>E-Commerce Platform</h3>
+                    <p>Modern online store with seamless checkout</p>
+                    <button class="btn btn-small">View Project</button>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <p class="section-subtitle">Comprehensive digital solutions tailored for your success</p>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
-                    <h3>Digital Marketing</h3>
-                    <p>Strategic marketing campaigns that drive results and maximize ROI across all digital channels.</p>
+            <div class="portfolio-item">
+                <div class="portfolio-overlay">
+                    <h3>Corporate Website</h3>
+                    <p>Professional business presence with CMS</p>
+                    <button class="btn btn-small">View Project</button>
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-share-alt"></i>
-                    </div>
-                    <h3>Social Media Management</h3>
-                    <p>Engage your audience with compelling content and strategic social media presence.</p>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-overlay">
+                    <h3>Brand Identity</h3>
+                    <p>Complete branding package for startup</p>
+                    <button class="btn btn-small">View Project</button>
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fab fa-facebook"></i>
-                    </div>
-                    <h3>Facebook & Instagram Ads</h3>
-                    <p>Targeted advertising campaigns that convert and scale your business growth.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Website Design & Development</h3>
-                    <p>Stunning, responsive websites that deliver exceptional user experiences.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3>Branding & Creative Design</h3>
-                    <p>Unique brand identities that resonate with your target audience and stand out.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3>SEO Optimization</h3>
-                    <p>Boost your organic visibility and drive qualified traffic to your website.</p>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-overlay">
+                    <h3>Marketing Campaign</h3>
+                    <p>Social media strategy that went viral</p>
+                    <button class="btn btn-small">View Project</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <h2 class="section-title">Our Portfolio</h2>
-            <p class="section-subtitle">Showcasing our latest creative works</p>
-            
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=E-Commerce+Website" alt="E-Commerce Website">
-                        <div class="portfolio-overlay">
-                            <h3>E-Commerce Platform</h3>
-                            <p>Modern online store with seamless checkout</p>
-                            <a href="#" class="portfolio-link"><i class="fas fa-external-link-alt"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Social+Media+Campaign" alt="Social Media Campaign">
-                        <div class="portfolio-overlay">
-                            <h3>Social Media Campaign</h3>
-                            <p>Viral marketing campaign for fashion brand</p>
-                            <a href="#" class="portfolio-link"><i class="fas fa-external-link-alt"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/400x300/f093fb/ffffff?text=Brand+Identity" alt="Brand Identity">
-                        <div class="portfolio-overlay">
-                            <h3>Brand Identity Design</h3>
-                            <p>Complete branding for tech startup</p>
-                            <a href="#" class="portfolio-link"><i class="fas fa-external-link-alt"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/400x300/4facfe/ffffff?text=Mobile+App+Design" alt="Mobile App Design">
-                        <div class="portfolio-overlay">
-                            <h3>Mobile App Interface</h3>
-                            <p>UI/UX design for fitness tracking app</p>
-                            <a href="#" class="portfolio-link"><i class="fas fa-external-link-alt"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/400x300/00f2fe/ffffff?text=SEO+Project" alt="SEO Project">
-                        <div class="portfolio-overlay">
-                            <h3>SEO Optimization</h3>
-                            <p>200% traffic increase for client website</p>
-                            <a href="#" class="portfolio-link"><i class="fas fa-external-link-alt"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Facebook+Ads" alt="Facebook Ads">
-                        <div class="portfolio-overlay">
-                            <h3>Facebook Ad Campaign</h3>
-                            <p>High-converting ads for local business</p>
-                            <a href="#" class="portfolio-link"><i class="fas fa-external-link-alt"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About CONFUSED DIGITEL</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Creativity Meets Results</h3>
-                    <p>We're a team of digital innovators passionate about helping businesses thrive in the online world. With over 5 years of experience, we've mastered the art of creating compelling digital experiences that drive real results.</p>
-                    <p>Our approach combines creative thinking with data-driven strategies to deliver solutions that not only look amazing but also perform exceptionally. We believe in building long-term partnerships based on trust, transparency, and tangible outcomes.</p>
-                    <div class="about-features">
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Creative Excellence</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Proven Results</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Trusted Partnership</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <img src="https://via.placeholder.com/500x400/667eea/ffffff?text=Creative+Team" alt="Creative Team">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <p class="section-subtitle">Ready to transform your digital presence? Let's talk!</p>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Let's Build Something Amazing Together</h3>
-                    <p>Whether you're a startup looking to make your mark or an established business ready to scale, we're here to help you achieve your digital goals.</p>
-                    
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <p>hello@confuseddigitel.com</p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h4>Phone</h4>
-                                <p>+94 77 123 4567</p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Location</h4>
-                                <p>Colombo, Sri Lanka</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                </div>
-            </div>
-            
-            <div class="whatsapp-float">
-                <a href="https://wa.me/94771234567" target="_blank">
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2 class="section-title">Let's Build Something Powerful Together</h2>
+        <div class="contact-box">
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <input type="text" placeholder="Your Name" required />
+                <input type="email" placeholder="Your Email" required />
+                <textarea rows="5" placeholder="Your Message" required></textarea>
+                <button class="btn btn-primary">Send Message</button>
+            </form>
+            <div class="contact-info">
+                <div>
                     <i class="fab fa-whatsapp"></i>
-                </a>
+                    <div>
+                        <h4>WhatsApp</h4>
+                        <p>+1 555 123 4567</p>
+                    </div>
+                </div>
+                <div>
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <p>hello@confuseddigitel.com</p>
+                    </div>
+                </div>
+                <div>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Location</h4>
+                        <p>Digital HQ, Worldwide</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>CONFUSED <span>DIGITEL</span></h3>
-                    <p>Building brands that stand out online.</p>
-                </div>
-                <div class="footer-social">
-                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 CONFUSED DIGITEL. All rights reserved.</p>
-            </div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="socials">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
         </div>
+        <p>&copy; <span id="year"></span> CONFUSED DIGITEL. All rights reserved.</p>
     </footer>
 
-    <!-- Custom JavaScript -->
-    <script src="js/script.js"></script>
+    <!-- Font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Particles config -->
+    <script>
+        tsParticles.load("tsparticles", {
+            fpsLimit: 60,
+            particles: {
+                number: { value: 80, density: { enable: true, area: 800 } },
+                color: { value: ["#00d4ff", "#8b5cf6", "#06ffa5"] },
+                shape: { type: "circle" },
+                opacity: { value: 0.6, random: true },
+                size: { value: 2, random: true },
+                move: {
+                    enable: true,
+                    speed: 1.5,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    outModes: { default: "out" }
+                }
+            },
+            interactivity: {
+                detectsOn: "canvas",
+                events: {
+                    onHover: { enable: true, mode: "grab" },
+                    onClick: { enable: true, mode: "push" },
+                    resize: true
+                }
+            },
+            detectRetina: true
+        });
+    </script>
+
+    <!-- Smooth-scroll + simple form handler -->
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Message sent (demo). We will get back to you soon!');
+            e.target.reset();
+        }
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
